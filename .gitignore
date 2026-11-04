@@ -3,3 +3,27 @@ __pycache__/
 *.pyc
 .env
 *.db
+
+# Python environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local database files
+instance/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+
+# Local logs and test output
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
