@@ -20,10 +20,17 @@ CREATE TABLE anime_entries (
     collection_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     watch_status TEXT NOT NULL DEFAULT 'plan_to_watch',
-    rating INTEGER CHECK (rating BETWEEN 1 AND 10),
+    rating INTEGER CHECK (rating BETWEEN 1 AND 10), -- Restricts ratings to 1–10 while allowing unrated anime.
     FOREIGN KEY (collection_id) REFERENCES collections(id),
     CHECK (watch_status IN ('plan_to_watch', 'watching', 'completed'))
 
 );
-
+-- Stores security-related events for auditing.
+CREATE TABLE audit_events (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    event_type TEXT NOT NULL,
+    occured_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Records when the security event occurred (UTC).
+    FOREIGN KEY (user_id) REFERENCES users(id) -- linkage of the audit event to an existign user, if when the user is known. 
+);
 
