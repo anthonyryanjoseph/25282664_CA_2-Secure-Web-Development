@@ -15,5 +15,15 @@ CREATE TABLE users (
     FOREIGN KEY (owner_id) REFERENCES users(id),
     CHECK (is_public IN (0,1))
 );
+CREATE TABLE anime_entries (
+    id INTEGER PRIMARY KEY,
+    collection_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    watch_status TEXT NOT NULL DEFAULT 'plan_to_watch',
+    rating INTEGER CHECK (rating BETWEEN 1 AND 10),
+    FOREIGN KEY (collection_id) REFERENCES collections(id),
+    CHECK (watch_status IN ('plan_to_watch', 'watching', 'completed'))
+
+);
 
 
